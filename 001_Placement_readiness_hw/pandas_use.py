@@ -24,10 +24,12 @@ df["Weakest_Skill"] = df[["Aptitude_Score","Communication_Score","Python_Score",
 print(df.head())
 
 df["Readiness_Score"] = (df["Average_Score"] + 2*df["Projects_Completed"] + df["Mock_Interviews_Attended"]).clip(upper=100)
-print(df.head())
+# print(df.head())
 
 df["Readiness_Band"] = "Ready"
 
 df["Readiness_Band"] = np.where((df["Readiness_Score"]<100) & ((df["Readiness_Score"]>=60) & (df["Readiness_Score"]<=74)) , "Almost Ready" , "Not Ready")
 print(df["Readiness_Band"].value_counts())
 print((df["Readiness_Band"].value_counts()).idxmax())
+
+df.to_csv("our_data.csv",index=False)
